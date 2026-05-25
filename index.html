@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DD Tech Academy – Your Gateway to Data & Cloud Careers</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -1157,8 +1158,11 @@
     document.getElementById('mobileNav').classList.toggle('open');
   }
 
-  /* ── Netlify Forms encode helper ── */
-  const encodeForm = d => Object.keys(d).map(k => encodeURIComponent(k) + '=' + encodeURIComponent(d[k])).join('&');
+  /* ── EmailJS config — paste your 3 values from emailjs.com ── */
+  const EJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
+  const EJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
+  const EJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+  emailjs.init(EJS_PUBLIC_KEY);
 
   /* ── Enroll Modal ───────────────────── */
   function openEnrollModal(course) {
@@ -1252,24 +1256,16 @@
       errEl.textContent = msg;
     };
 
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encodeForm({
-        'form-name': 'enrollment',
-        'Name':       payload.name,
-        'Email':      payload.email,
-        'Phone':      payload.phone,
-        'Course':     payload.course,
-        'Background': payload.experience,
-        'Message':    payload.message
-      })
+    emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_ID, {
+      from_name:  payload.name,
+      from_email: payload.email,
+      phone:      payload.phone,
+      course:     payload.course,
+      background: payload.experience,
+      message:    payload.message || 'No message provided'
     })
-    .then(res => {
-      if (res.ok) finish();
-      else showFormError('Submission failed. Please try again.');
-    })
-    .catch(() => showFormError('Network error. Please check your connection and try again.'));
+    .then(() => finish())
+    .catch(err => showFormError('Failed to send. Please try again. (' + (err.text || err) + ')'));
   }
 
   document.addEventListener('keydown', e => {
