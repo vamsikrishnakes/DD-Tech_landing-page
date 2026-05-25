@@ -1256,16 +1256,29 @@
       errEl.textContent = msg;
     };
 
-    emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_ID, {
-      from_name:  payload.name,
-      from_email: payload.email,
-      phone:      payload.phone,
-      course:     payload.course,
-      background: payload.experience,
-      message:    payload.message || 'No message provided'
-    })
+    const timeout = new Promise((_, reject) =>
+      setTimeout(() => reject({ text: 'timeout' }), 10000)
+    );
+
+    Promise.race([
+      emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_ID, {
+        from_name:  payload.name,
+        from_email: payload.email,
+        phone:      payload.phone,
+        course:     payload.course,
+        background: payload.experience,
+        message:    payload.message || 'No message provided'
+      }),
+      timeout
+    ])
     .then(() => finish())
-    .catch(err => showFormError('Failed to send. Please try again. (' + (err.text || err) + ')'));
+    .catch(err => {
+      if ((err.text || err) === 'timeout') {
+        showFormError('Request timed out. Please check your internet and try again.');
+      } else {
+        showFormError('Failed to send. Please try again. (' + (err.text || err) + ')');
+      }
+    });
   }
 
   document.addEventListener('keydown', e => {
