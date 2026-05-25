@@ -1147,8 +1147,8 @@
     document.getElementById('mobileNav').classList.toggle('open');
   }
 
-  /* ── Google Apps Script endpoint (paste your Web App URL here after deploy) */
-  var SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
+  /* ── Formspree endpoint — replace with your ID from formspree.io ── */
+  var FORMSPREE_ID = 'YOUR_FORMSPREE_ID';
 
   /* ── Enroll Modal ───────────────────── */
   function openEnrollModal(course) {
@@ -1229,20 +1229,40 @@
       document.getElementById('modalSuccess').classList.add('show');
     };
 
-    if (!SCRIPT_URL || SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL') {
-      // Script URL not configured yet — still show success to user
-      setTimeout(finish, 800);
-      return;
-    }
+    const showFormError = (msg) => {
+      btn.disabled = false;
+      btn.textContent = '🚀 Enroll for Free';
+      let errEl = document.getElementById('form-submit-error');
+      if (!errEl) {
+        errEl = document.createElement('div');
+        errEl.id = 'form-submit-error';
+        errEl.style.cssText = 'color:#e02020;font-size:12px;font-weight:700;text-align:center;margin-top:10px;padding:10px;background:#fff0f0;border-radius:8px;border:1px solid #fca5a5';
+        document.getElementById('submitBtn').after(errEl);
+      }
+      errEl.textContent = msg;
+    };
 
-    fetch(SCRIPT_URL, {
+    fetch('https://formspree.io/f/' + FORMSPREE_ID, {
       method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        Name:       payload.name,
+        Email:      payload.email,
+        Phone:      payload.phone,
+        Course:     payload.course,
+        Background: payload.experience,
+        Message:    payload.message
+      })
     })
-    .then(() => finish())
-    .catch(() => finish()); // show success even on network error so UX isn't broken
+    .then(res => res.json())
+    .then(data => {
+      if (data.ok) {
+        finish();
+      } else {
+        showFormError('Submission failed: ' + (data.error || 'Please try again.'));
+      }
+    })
+    .catch(() => showFormError('Network error. Please check your connection and try again.'));
   }
 
   document.addEventListener('keydown', e => {
