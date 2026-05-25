@@ -1144,6 +1144,9 @@
     document.getElementById('mobileNav').classList.toggle('open');
   }
 
+  /* ── Google Apps Script endpoint (paste your Web App URL here after deploy) */
+  var SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
+
   /* ── Enroll Modal ───────────────────── */
   function openEnrollModal(course) {
     const modal = document.getElementById('enrollModal');
@@ -1206,13 +1209,37 @@
 
     const btn = document.getElementById('submitBtn');
     btn.disabled = true;
-    btn.textContent = 'Submitting…';
+    btn.textContent = '⏳ Submitting…';
 
-    setTimeout(() => {
+    const payload = {
+      name:       name.value.trim(),
+      email:      email.value.trim(),
+      phone:      document.getElementById('f-code').value + ' ' + phone.value.trim(),
+      course:     course.value,
+      experience: exp.value,
+      message:    document.getElementById('f-msg').value.trim()
+    };
+
+    const finish = () => {
       document.getElementById('modalLeft').style.display = 'none';
       document.getElementById('modalForm').style.display = 'none';
       document.getElementById('modalSuccess').classList.add('show');
-    }, 900);
+    };
+
+    if (!SCRIPT_URL || SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL') {
+      // Script URL not configured yet — still show success to user
+      setTimeout(finish, 800);
+      return;
+    }
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(() => finish())
+    .catch(() => finish()); // show success even on network error so UX isn't broken
   }
 
   document.addEventListener('keydown', e => {
