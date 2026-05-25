@@ -1038,17 +1038,24 @@
       <h4>Free Enrollment</h4>
       <p class="modal-sub">Fill in your details and we'll get back to you within 24 hours.</p>
 
-      <form id="enrollForm" onsubmit="submitEnrollForm(event)" novalidate>
+      <form id="enrollForm" action="https://formsubmit.co/vamsikrishnakesari@gmail.com"
+            method="POST" onsubmit="return validateEnrollForm()">
+
+        <!-- FormSubmit hidden settings -->
+        <input type="hidden" name="_subject"  value="🎓 New Enrollment — DD Tech Academy" />
+        <input type="hidden" name="_captcha"  value="false" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_next"     id="f-next" value="" />
 
         <div class="form-row">
           <div class="form-group">
             <label for="f-name">Full Name *</label>
-            <input type="text" id="f-name" placeholder="John Smith" />
+            <input type="text" id="f-name" name="Name" placeholder="John Smith" />
             <div class="err-msg" id="err-name">Please enter your full name.</div>
           </div>
           <div class="form-group">
             <label for="f-email">Email Address *</label>
-            <input type="email" id="f-email" placeholder="john@example.com" />
+            <input type="email" id="f-email" name="Email" placeholder="john@example.com" />
             <div class="err-msg" id="err-email">Please enter a valid email.</div>
           </div>
         </div>
@@ -1056,21 +1063,21 @@
         <div class="form-group">
           <label for="f-phone">Phone Number *</label>
           <div class="phone-wrap">
-            <select class="phone-code" id="f-code">
+            <select class="phone-code" id="f-code" name="Country_Code">
               <option value="+1">🇺🇸 +1</option>
               <option value="+91">🇮🇳 +91</option>
               <option value="+44">🇬🇧 +44</option>
               <option value="+61">🇦🇺 +61</option>
               <option value="+1-CA">🇨🇦 +1</option>
             </select>
-            <input type="tel" id="f-phone" placeholder="(555) 000-0000" style="flex:1" />
+            <input type="tel" id="f-phone" name="Phone" placeholder="(555) 000-0000" style="flex:1" />
           </div>
           <div class="err-msg" id="err-phone">Please enter a valid phone number.</div>
         </div>
 
         <div class="form-group">
           <label for="f-course">Course Interested In *</label>
-          <select id="f-course">
+          <select id="f-course" name="Course">
             <option value="">— Select a Program —</option>
             <option>Data Analyst</option>
             <option>SQL</option>
@@ -1086,7 +1093,7 @@
 
         <div class="form-group">
           <label for="f-exp">Your Background *</label>
-          <select id="f-exp">
+          <select id="f-exp" name="Background">
             <option value="">— Select your profile —</option>
             <option>Working Professional – Technical</option>
             <option>Working Professional – Non-Technical</option>
@@ -1101,7 +1108,7 @@
 
         <div class="form-group">
           <label for="f-msg">Message (Optional)</label>
-          <textarea id="f-msg" placeholder="Any questions or specific requirements..."></textarea>
+          <textarea id="f-msg" name="Message" placeholder="Any questions or specific requirements..."></textarea>
         </div>
 
         <div class="terms-wrap">
@@ -1158,7 +1165,22 @@
   }
 
   /* ── EmailJS config — paste your 3 values from emailjs.com ── */
-  const SUBMIT_URL = 'https://formsubmit.co/ajax/vamsikrishnakesari@gmail.com';
+  /* set _next URL so FormSubmit redirects back after submission */
+  document.addEventListener('DOMContentLoaded', () => {
+    const nextInput = document.getElementById('f-next');
+    if (nextInput) nextInput.value = window.location.origin + window.location.pathname + '?enrolled=true';
+
+    /* if redirected back after successful enrollment, show success modal */
+    if (window.location.search.includes('enrolled=true')) {
+      history.replaceState({}, '', window.location.pathname);
+      openEnrollModal();
+      setTimeout(() => {
+        document.getElementById('modalLeft').style.display = 'none';
+        document.getElementById('modalForm').style.display  = 'none';
+        document.getElementById('modalSuccess').classList.add('show');
+      }, 100);
+    }
+  });
 
   /* ── Enroll Modal ───────────────────── */
   function openEnrollModal(course) {
@@ -1192,25 +1214,24 @@
     document.querySelectorAll('.form-group input, .form-group select').forEach(el => el.classList.remove('error'));
   }
 
-  function submitEnrollForm(e) {
-    e.preventDefault();
+  function validateEnrollForm() {
     let valid = true;
 
-    const name  = document.getElementById('f-name');
-    const email = document.getElementById('f-email');
-    const phone = document.getElementById('f-phone');
-    const course= document.getElementById('f-course');
-    const exp   = document.getElementById('f-exp');
-    const terms = document.getElementById('f-terms');
+    const name   = document.getElementById('f-name');
+    const email  = document.getElementById('f-email');
+    const phone  = document.getElementById('f-phone');
+    const course = document.getElementById('f-course');
+    const exp    = document.getElementById('f-exp');
+    const terms  = document.getElementById('f-terms');
 
     const show = (id, el) => { document.getElementById(id).classList.add('show'); el.classList.add('error'); valid = false; };
     const hide = (id, el) => { document.getElementById(id).classList.remove('show'); el.classList.remove('error'); };
 
-    name.value.trim().length < 2   ? show('err-name', name)   : hide('err-name', name);
-    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim()) ? show('err-email', email) : hide('err-email', email);
-    !/^\d{7,15}$/.test(phone.value.replace(/\D/g,''))       ? show('err-phone', phone) : hide('err-phone', phone);
-    !course.value                   ? show('err-course', course): hide('err-course', course);
-    !exp.value                      ? show('err-exp', exp)     : hide('err-exp', exp);
+    name.value.trim().length < 2                             ? show('err-name',   name)   : hide('err-name',   name);
+    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())  ? show('err-email',  email)  : hide('err-email',  email);
+    !/^\d{7,15}$/.test(phone.value.replace(/\D/g,''))        ? show('err-phone',  phone)  : hide('err-phone',  phone);
+    !course.value                                            ? show('err-course', course) : hide('err-course', course);
+    !exp.value                                               ? show('err-exp',    exp)    : hide('err-exp',    exp);
 
     if (!terms.checked) {
       document.getElementById('err-terms').classList.add('show'); valid = false;
@@ -1218,62 +1239,13 @@
       document.getElementById('err-terms').classList.remove('show');
     }
 
-    if (!valid) return;
+    if (!valid) return false;
 
+    /* show loading state then let native form POST proceed */
     const btn = document.getElementById('submitBtn');
-    btn.disabled = true;
-    btn.textContent = '⏳ Submitting…';
-
-    const payload = {
-      name:       name.value.trim(),
-      email:      email.value.trim(),
-      phone:      document.getElementById('f-code').value + ' ' + phone.value.trim(),
-      course:     course.value,
-      experience: exp.value,
-      message:    document.getElementById('f-msg').value.trim()
-    };
-
-    const finish = () => {
-      document.getElementById('modalLeft').style.display = 'none';
-      document.getElementById('modalForm').style.display = 'none';
-      document.getElementById('modalSuccess').classList.add('show');
-    };
-
-    const showFormError = (msg) => {
-      btn.disabled = false;
-      btn.textContent = '🚀 Enroll for Free';
-      let errEl = document.getElementById('form-submit-error');
-      if (!errEl) {
-        errEl = document.createElement('div');
-        errEl.id = 'form-submit-error';
-        errEl.style.cssText = 'color:#e02020;font-size:12px;font-weight:700;text-align:center;margin-top:10px;padding:10px;background:#fff0f0;border-radius:8px;border:1px solid #fca5a5';
-        document.getElementById('submitBtn').after(errEl);
-      }
-      errEl.textContent = msg;
-    };
-
-    fetch(SUBMIT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        _subject:   'New Enrollment: ' + payload.name + ' — ' + payload.course,
-        Name:       payload.name,
-        Email:      payload.email,
-        Phone:      payload.phone,
-        Course:     payload.course,
-        Background: payload.experience,
-        Message:    payload.message || '—'
-      })
-    })
-    .then(res => res.json())
-    .then(data => {
-      if (data.success === 'true' || data.success === true) {
-        finish();
-      } else {
-        showFormError('Submission failed. Please try again.');
-      }
-    })
-    .catch(() => showFormError('Network error. Please check your connection.'));
+    btn.disabled    = true;
+    btn.textContent = '⏳ Sending…';
+    return true; /* allow the form to POST to FormSubmit */
   }
 
   document.addEventListener('keydown', e => {
