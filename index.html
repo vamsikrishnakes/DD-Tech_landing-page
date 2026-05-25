@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DD Tech Academy – Your Gateway to Data & Cloud Careers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #1a2a5e;
+      --navy2:  #0f1e4a;
+      --orange: #f5a623;
+      --yellow: #ffd700;
+      --red:    #e02020;
+      --white:  #ffffff;
+      --light:  #f4f6fb;
+      --gray:   #6b7280;
+      --border: #dde3f0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: #222;
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ─── HEADER ─────────────────────────────────────── */
+    header {
+      position: sticky; top: 0; z-index: 999;
+      background: var(--navy);
+      box-shadow: 0 2px 12px rgba(0,0,0,.35);
+    }
+    .header-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 20px; height: 64px;
+    }
+    .logo-wrap { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-dd {
+      width: 42px; height: 42px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--orange), #d4820a);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 18px; color: var(--white);
+      letter-spacing: -1px;
+    }
+    .logo-text { color: var(--white); font-weight: 800; font-size: 15px; line-height: 1.2; }
+    .logo-text span { color: var(--orange); font-size: 10px; font-weight: 600; display: block; letter-spacing: 2px; text-transform: uppercase; }
+
+    nav { display: flex; gap: 4px; }
+    nav a {
+      color: rgba(255,255,255,.8); text-decoration: none;
+      font-size: 12px; font-weight: 600; letter-spacing: .5px;
+      padding: 6px 10px; border-radius: 6px;
+      transition: background .2s, color .2s;
+    }
+    nav a:hover { background: rgba(255,255,255,.1); color: var(--white); }
+
+    .enroll-btn {
+      background: var(--orange); color: var(--white);
+      border: none; border-radius: 8px;
+      padding: 9px 18px; font-size: 13px; font-weight: 700;
+      cursor: pointer; text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .enroll-btn:hover { background: #e0941a; transform: translateY(-1px); }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: .3s; }
+
+    /* ─── HERO ───────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy2) 0%, var(--navy) 60%, #1e3a8a 100%);
+      padding: 70px 20px 60px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(245,166,35,.08) 0%, transparent 65%);
+    }
+    .hero-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 40px; align-items: center; position: relative;
+    }
+    .hero-badge-row {
+      display: flex; flex-direction: column; gap: 10px;
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px; padding: 18px 20px;
+    }
+    .badge-item {
+      display: flex; align-items: center; gap: 10px;
+      color: var(--white); font-size: 13px; font-weight: 600;
+    }
+    .badge-check {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--orange); display: flex; align-items: center; justify-content: center;
+      font-size: 11px; flex-shrink: 0;
+    }
+    .hero-left { text-align: left; }
+    .hero-sub {
+      color: var(--orange); font-size: 11px; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px;
+    }
+    .hero-title {
+      font-size: clamp(24px, 4vw, 46px);
+      font-weight: 900; color: var(--white);
+      line-height: 1.15; margin-bottom: 18px;
+      text-transform: uppercase;
+    }
+    .hero-title .highlight { color: var(--orange); }
+    .hero-desc {
+      color: rgba(255,255,255,.75); font-size: 15px;
+      line-height: 1.65; margin-bottom: 28px; max-width: 520px;
+    }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--orange); color: var(--white);
+      padding: 14px 28px; border-radius: 10px;
+      font-weight: 700; font-size: 14px; text-decoration: none;
+      transition: background .2s, transform .15s;
+      box-shadow: 0 4px 16px rgba(245,166,35,.4);
+    }
+    .btn-primary:hover { background: #e0941a; transform: translateY(-2px); }
+    .btn-outline {
+      border: 2px solid rgba(255,255,255,.35); color: var(--white);
+      padding: 12px 26px; border-radius: 10px;
+      font-weight: 700; font-size: 14px; text-decoration: none;
+      transition: border-color .2s, background .2s;
+    }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,.08); }
+
+    /* ─── SECTION SHELL ──────────────────────────────── */
+    section { padding: 64px 20px; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-tag {
+      text-align: center; color: var(--orange);
+      font-size: 11px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; margin-bottom: 8px;
+    }
+    .section-title {
+      text-align: center; font-size: clamp(22px, 3vw, 32px);
+      font-weight: 900; color: var(--navy); margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    .section-title .hl { color: var(--orange); }
+    .section-line {
+      width: 60px; height: 4px; border-radius: 2px;
+      background: var(--orange); margin: 0 auto 44px;
+    }
+
+    /* ─── PROGRAMS ───────────────────────────────────── */
+    .programs { background: var(--light); }
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 20px;
+    }
+    .prog-card {
+      background: var(--white); border-radius: 16px;
+      border: 2px solid var(--border);
+      padding: 28px 16px 22px;
+      text-align: center; cursor: pointer;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+    }
+    .prog-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(26,42,94,.14);
+      border-color: var(--orange);
+    }
+    .prog-icon {
+      width: 60px; height: 60px; margin: 0 auto 14px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .prog-icon svg { width: 100%; height: 100%; }
+    .prog-label {
+      font-size: 12px; font-weight: 800; color: var(--navy);
+      text-transform: uppercase; letter-spacing: .5px; line-height: 1.3;
+    }
+
+    /* ─── CURRICULUM TABS ────────────────────────────── */
+    .curriculum { background: var(--white); }
+    .tab-nav {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 32px; justify-content: center;
+    }
+    .tab-btn {
+      padding: 9px 16px; border-radius: 30px;
+      border: 2px solid var(--border); background: var(--white);
+      font-size: 12px; font-weight: 700; color: var(--gray);
+      cursor: pointer; transition: all .2s; text-transform: uppercase; letter-spacing: .5px;
+    }
+    .tab-btn.active, .tab-btn:hover {
+      background: var(--navy); color: var(--white); border-color: var(--navy);
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .curr-card {
+      background: var(--light); border-radius: 16px;
+      padding: 36px 40px; border-left: 6px solid var(--orange);
+    }
+    .curr-card h3 {
+      font-size: 20px; font-weight: 900; color: var(--navy);
+      text-transform: uppercase; margin-bottom: 24px;
+    }
+    .curr-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .curr-item {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--white); border-radius: 10px;
+      padding: 12px 16px; font-size: 13px; font-weight: 600;
+      color: #333; border: 1px solid var(--border);
+      transition: border-color .2s, color .2s;
+    }
+    .curr-item:hover { border-color: var(--orange); color: var(--navy); }
+    .curr-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--orange); flex-shrink: 0;
+    }
+
+    /* ─── WHY CHOOSE ─────────────────────────────────── */
+    .why { background: var(--light); }
+    .why-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+    }
+    .why-list { display: flex; flex-direction: column; gap: 14px; }
+    .why-item {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--white); border-radius: 12px;
+      padding: 14px 18px; border: 1px solid var(--border);
+      font-size: 14px; font-weight: 600; color: #333;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .why-item:hover { box-shadow: 0 4px 16px rgba(26,42,94,.1); transform: translateX(4px); }
+    .why-check {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 12px; flex-shrink: 0;
+    }
+    .us-box {
+      background: linear-gradient(135deg, var(--navy2), var(--navy));
+      border-radius: 20px; padding: 40px 32px; text-align: center;
+      color: var(--white); position: relative; overflow: hidden;
+    }
+    .us-box::before {
+      content: '';
+      position: absolute; top: -40px; right: -40px;
+      width: 180px; height: 180px; border-radius: 50%;
+      background: rgba(245,166,35,.1);
+    }
+    .us-flag { font-size: 52px; margin-bottom: 12px; }
+    .us-box h3 {
+      font-size: 22px; font-weight: 900; text-transform: uppercase;
+      margin-bottom: 14px; line-height: 1.2;
+    }
+    .us-box h3 span { color: var(--orange); }
+    .us-box p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,.8); margin-bottom: 20px; }
+    .us-statue { font-size: 48px; opacity: .7; }
+
+    /* ─── SUPPORT BANNER ─────────────────────────────── */
+    .support-banner {
+      background: linear-gradient(90deg, var(--navy2), var(--navy));
+      padding: 40px 20px; text-align: center;
+    }
+    .support-banner .section-inner {
+      display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;
+    }
+    .support-icon { font-size: 36px; }
+    .support-text { font-size: clamp(16px, 2.5vw, 24px); font-weight: 800; color: var(--white); text-transform: uppercase; }
+    .support-text span { color: var(--orange); }
+
+    /* ─── WHO CAN JOIN ───────────────────────────────── */
+    .join { background: var(--white); }
+    .join-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    }
+    .join-card {
+      text-align: center; padding: 36px 16px;
+      border-radius: 16px; border: 2px solid var(--border);
+      transition: transform .25s, border-color .25s, box-shadow .25s;
+    }
+    .join-card:hover {
+      transform: translateY(-6px); border-color: var(--orange);
+      box-shadow: 0 10px 28px rgba(26,42,94,.12);
+    }
+    .join-icon { font-size: 52px; margin-bottom: 14px; }
+    .join-label { font-size: 14px; font-weight: 800; color: var(--navy); text-transform: uppercase; }
+
+    /* ─── CTA BANNER ─────────────────────────────────── */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--navy2), #1e3a8a);
+      padding: 64px 20px; text-align: center;
+    }
+    .cta-banner h2 {
+      font-size: clamp(26px, 4vw, 48px); font-weight: 900;
+      color: var(--white); text-transform: uppercase; margin-bottom: 12px;
+    }
+    .cta-banner h2 span { color: var(--orange); }
+    .cta-banner p { color: rgba(255,255,255,.75); font-size: 15px; margin-bottom: 32px; }
+    .cta-enroll {
+      display: inline-block;
+      background: var(--yellow); color: var(--navy);
+      padding: 16px 40px; border-radius: 12px;
+      font-weight: 900; font-size: 16px; text-decoration: none;
+      text-transform: uppercase; letter-spacing: 1px;
+      box-shadow: 0 6px 24px rgba(255,215,0,.4);
+      transition: transform .2s, box-shadow .2s;
+      animation: pulse 2s infinite;
+    }
+    .cta-enroll:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(255,215,0,.5); }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 6px 24px rgba(255,215,0,.4); }
+      50%       { box-shadow: 0 6px 40px rgba(255,215,0,.7); }
+    }
+
+    /* ─── CONTACT ────────────────────────────────────── */
+    .contact { background: var(--light); }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 28px;
+    }
+    .contact-card {
+      background: var(--white); border-radius: 16px;
+      padding: 32px 24px; text-align: center;
+      border: 1px solid var(--border);
+      transition: box-shadow .2s, transform .2s;
+    }
+    .contact-card:hover { box-shadow: 0 8px 24px rgba(26,42,94,.1); transform: translateY(-4px); }
+    .contact-icon { font-size: 40px; margin-bottom: 14px; }
+    .contact-card h4 { font-size: 13px; font-weight: 700; color: var(--orange); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .contact-card p, .contact-card a { font-size: 14px; color: #444; line-height: 1.6; text-decoration: none; }
+    .contact-card a:hover { color: var(--orange); }
+    .qr-box {
+      width: 90px; height: 90px; margin: 0 auto 12px;
+      background: var(--light); border: 2px dashed var(--border);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      font-size: 11px; color: var(--gray); font-weight: 600; text-align: center; padding: 8px;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────── */
+    footer {
+      background: var(--navy2); padding: 28px 20px;
+      text-align: center; color: rgba(255,255,255,.5);
+      font-size: 13px;
+    }
+    footer span { color: var(--orange); }
+
+    /* ─── MOBILE NAV DRAWER ──────────────────────────── */
+    .mobile-nav {
+      display: none; position: fixed; inset: 0; z-index: 998;
+      background: rgba(0,0,0,.5);
+    }
+    .mobile-nav.open { display: block; }
+    .mobile-nav-panel {
+      position: absolute; top: 64px; left: 0; right: 0;
+      background: var(--navy); padding: 20px;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .mobile-nav-panel a {
+      color: rgba(255,255,255,.85); text-decoration: none;
+      font-size: 14px; font-weight: 600; padding: 12px 16px;
+      border-radius: 8px; transition: background .2s;
+    }
+    .mobile-nav-panel a:hover { background: rgba(255,255,255,.1); }
+
+    /* ─── RESPONSIVE ─────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-badge-row { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+      .why-grid { grid-template-columns: 1fr; }
+      .join-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      nav, .enroll-btn { display: none; }
+      .hamburger { display: flex; }
+      .programs-grid { grid-template-columns: repeat(2, 1fr); }
+      .join-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid { grid-template-columns: 1fr; }
+      .curr-card { padding: 24px 20px; }
+      section { padding: 48px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ════════════════════════════════════════ -->
+<header>
+  <div class="header-inner">
+    <a class="logo-wrap" href="#hero">
+      <div class="logo-dd">DD</div>
+      <div class="logo-text">
+        DD TECH ACADEMY
+        <span>— Academy —</span>
+      </div>
+    </a>
+    <nav>
+      <a href="#programs">Programs</a>
+      <a href="#curriculum">Curriculum</a>
+      <a href="#why">Why Us</a>
+      <a href="#join">Who Joins</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="enroll-btn" href="#contact">Enroll Now</a>
+    <div class="hamburger" id="ham" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav" onclick="toggleNav()">
+  <div class="mobile-nav-panel" onclick="event.stopPropagation()">
+    <a href="#programs" onclick="toggleNav()">Programs</a>
+    <a href="#curriculum" onclick="toggleNav()">Curriculum</a>
+    <a href="#why" onclick="toggleNav()">Why Us</a>
+    <a href="#join" onclick="toggleNav()">Who Joins</a>
+    <a href="#contact" onclick="toggleNav()">Contact</a>
+    <a href="#contact" onclick="toggleNav()" style="background:var(--orange);color:#fff;margin-top:8px;text-align:center;font-weight:800;">Enroll Now</a>
+  </div>
+</div>
+
+<!-- ═══ HERO ══════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <p class="hero-sub">Your Gateway to Data &amp; Cloud Careers</p>
+      <h1 class="hero-title">
+        Master <span class="highlight">In-Demand</span><br />
+        Skills. Build A<br />
+        Successful Career.
+      </h1>
+      <p class="hero-desc">
+        Industry-oriented training programs designed exclusively for students
+        and professionals in the United States. Real-time projects, expert
+        trainers, and guaranteed placement support.
+      </p>
+      <div class="hero-btns">
+        <a class="btn-primary" href="#programs">Explore Programs</a>
+        <a class="btn-outline" href="#contact">Talk to an Advisor</a>
+      </div>
+    </div>
+    <div class="hero-badge-row">
+      <div class="badge-item">
+        <div class="badge-check">✓</div>
+        Industry-Oriented Training
+      </div>
+      <div class="badge-item">
+        <div class="badge-check">✓</div>
+        Real-Time Projects
+      </div>
+      <div class="badge-item">
+        <div class="badge-check">✓</div>
+        Placement Assistance
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROGRAMS ══════════════════════════════════════ -->
+<section class="programs" id="programs">
+  <div class="section-inner">
+    <p class="section-tag">What We Offer</p>
+    <h2 class="section-title">Our Training <span class="hl">Programs</span></h2>
+    <div class="section-line"></div>
+    <div class="programs-grid">
+
+      <!-- Data Analyst -->
+      <div class="prog-card" onclick="openTab('data-analyst')">
+        <div class="prog-icon">
+          <svg viewBox="0 0 60 60" fill="none">
+            <rect x="4" y="30" width="10" height="22" rx="2" fill="#22c55e"/>
+            <rect x="18" y="20" width="10" height="32" rx="2" fill="#16a34a"/>
+            <rect x="32" y="10" width="10" height="42" rx="2" fill="#15803d"/>
+            <rect x="46" y="24" width="10" height="28" rx="2" fill="#22c55e"/>
+            <circle cx="8" cy="14" r="4" fill="#f5a623"/>
+            <line x1="8" y1="14" x2="52" y2="8" stroke="#f5a623" stroke-width="2" stroke-dasharray="3,2"/>
+          </svg>
+        </div>
+        <div class="prog-label">Data Analyst</div>
+      </div>
+
+      <!-- SQL -->
+      <div class="prog-card" onclick="openTab('sql')">
+        <div class="prog-icon">
+          <svg viewBox="0 0 60 60" fill="none">
+            <ellipse cx="30" cy="14" rx="22" ry="8" fill="#1a2a5e"/>
+            <path d="M8 14v10c0 4.4 9.8 8 22 8s22-3.6 22-8V14" fill="#1a2a5e" opacity=".8"/>
+            <ellipse cx="30" cy="24" rx="22" ry="8" fill="#2d4a9e"/>
+            <path d="M8 24v10c0 4.4 9.8 8 22 8s22-3.6 22-8V24" fill="#2d4a9e" opacity=".8"/>
+            <ellipse cx="30" cy="34" rx="22" ry="8" fill="#3d6ad4"/>
+            <text x="30" y="38" text-anchor="middle" fill="white" font-size="9" font-weight="700" font-family="Montserrat,sans-serif">SQL</text>
+          </svg>
+        </div>
+        <div class="prog-label">SQL</div>
+      </div>
+
+      <!-- Power BI -->
+      <div class="prog-card" onclick="openTab('power-bi')">
+        <div class="prog-icon">
+          <svg viewBox="0 0 60 60" fill="none">
+            <rect x="6" y="36" width="10" height="16" rx="2" fill="#f5a623"/>
+            <rect x="20" y="24" width="10" height="28" rx="2" fill="#e0941a"/>
+            <rect x="34" y="14" width="10" height="38" rx="2" fill="#f5a623"/>
+            <rect x="48" y="28" width="6" height="24" rx="2" fill="#ffd166"/>
+            <polyline points="6,30 20,22 34,12 54,20" stroke="#1a2a5e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="prog-label">Power BI</div>
+      </div>
+
+      <!-- ETL Concepts -->
+      <div class="prog-card" onclick="openTab('etl')">
+        <div class="prog-icon">
+          <svg viewBox="0 0 60 60" fill="none">
+            <circle cx="12" cy="30" r="10" fill="#6366f1" opacity=".9"/>
+            <circle cx="48" cy="30" r="10" fill="#8b5cf6" opacity=".9"/>
+            <rect x="22" y="22" width="16" height="16" rx="4" fill="#4f46e5"/>
+            <text x="30" y="33" text-anchor="middle" fill="white" font-size="7" font-weight="800" font-family="Montserrat,sans-serif">ETL</text>
+            <path d="M22 30h-10M38 30h10" stroke="#4f46e5" stroke-width="2" stroke-dasharray="2,1"/>
+          </svg>
+        </div>
+        <div class="prog-label">ETL Concepts</div>
+      </div>
+
+      <!-- Snowflake -->
+      <div class="prog-card" onclick="openTab('snowflake')">
+        <div class="prog-icon">
+          <svg viewBox="0 0 60 60" fill="none">
+            <line x1="30" y1="4" x2="30" y2="56" stroke="#29b5e8" stroke-width="4" stroke-linecap="round"/>
+            <line x1="4" y1="30" x2="56" y2="30" stroke="#29b5e8" stroke-width="4" stroke-linecap="round"/>
+            <line x1="10" y1="10" x2="50" y2="50" stroke="#29b5e8" stroke-width="4" stroke-linecap="round"/>
+            <line x1="50" y1="10" x2="10" y2="50" stroke="#29b5e8" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="30" cy="30" r="6" fill="#29b5e8"/>
+            <circle cx="30" cy="6" r="3" fill="#0096c7"/>
+            <circle cx="30" cy="54" r="3" fill="#0096c7"/>
+            <circle cx="6" cy="30" r="3" fill="#0096c7"/>
+            <circle cx="54" cy="30" r="3" fill="#0096c7"/>
+          </svg>
+        </div>
+        <div class="prog-label">Snowflake Data Engineer</div>
+      </div>
+
+      <!-- Azure -->
+      <div class="prog-card" onclick="openTab('azure')">
+        <div class="prog-icon">
+          <svg viewBox="0 0 60 60" fill="none">
+            <polygon points="20,8 36,8 54,50 38,50" fill="#0078d4" opacity=".9"/>
+            <polygon points="6,50 22,50 30,30 14,30" fill="#50b8fa"/>
+            <polygon points="20,8 14,30 30,30 36,8" fill="#0090e0"/>
+          </svg>
+        </div>
+        <div class="prog-label">Azure Data Engineer</div>
+      </div>
+
+      <!-- Databricks -->
+      <div class="prog-card" onclick="openTab('databricks')">
+        <div class="prog-icon">
+          <svg viewBox="0 0 60 60" fill="none">
+            <polygon points="30,4 54,18 54,42 30,56 6,42 6,18" fill="#e02020" opacity=".15" stroke="#e02020" stroke-width="2"/>
+            <polygon points="30,12 46,22 46,38 30,48 14,38 14,22" fill="#e02020" opacity=".3"/>
+            <polygon points="30,22 38,27 38,37 30,42 22,37 22,27" fill="#e02020"/>
+            <text x="30" y="34" text-anchor="middle" fill="white" font-size="8" font-weight="800" font-family="Montserrat,sans-serif">DB</text>
+          </svg>
+        </div>
+        <div class="prog-label">Databricks</div>
+      </div>
+
+      <!-- IT Audit -->
+      <div class="prog-card" onclick="openTab('it-audit')">
+        <div class="prog-icon">
+          <svg viewBox="0 0 60 60" fill="none">
+            <rect x="10" y="6" width="34" height="44" rx="4" fill="#f4f6fb" stroke="#1a2a5e" stroke-width="2.5"/>
+            <rect x="20" y="2" width="14" height="10" rx="3" fill="#1a2a5e"/>
+            <line x1="18" y1="24" x2="36" y2="24" stroke="#1a2a5e" stroke-width="2" stroke-linecap="round"/>
+            <line x1="18" y1="32" x2="36" y2="32" stroke="#1a2a5e" stroke-width="2" stroke-linecap="round"/>
+            <line x1="18" y1="40" x2="28" y2="40" stroke="#1a2a5e" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="15" cy="24" r="2.5" fill="#22c55e"/>
+            <circle cx="15" cy="32" r="2.5" fill="#22c55e"/>
+            <circle cx="15" cy="40" r="2.5" fill="#f5a623"/>
+          </svg>
+        </div>
+        <div class="prog-label">IT Audit</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CURRICULUM ════════════════════════════════════ -->
+<section class="curriculum" id="curriculum">
+  <div class="section-inner">
+    <p class="section-tag">Course Content</p>
+    <h2 class="section-title">What You <span class="hl">Will Learn</span></h2>
+    <div class="section-line"></div>
+
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="openTab('data-analyst')">Data Analyst</button>
+      <button class="tab-btn" onclick="openTab('sql')">SQL</button>
+      <button class="tab-btn" onclick="openTab('power-bi')">Power BI</button>
+      <button class="tab-btn" onclick="openTab('etl')">ETL Concepts</button>
+      <button class="tab-btn" onclick="openTab('snowflake')">Snowflake</button>
+      <button class="tab-btn" onclick="openTab('azure')">Azure DE</button>
+      <button class="tab-btn" onclick="openTab('databricks')">Databricks</button>
+      <button class="tab-btn" onclick="openTab('it-audit')">IT Audit</button>
+    </div>
+
+    <!-- Data Analyst -->
+    <div class="tab-panel active" id="tab-data-analyst">
+      <div class="curr-card">
+        <h3>📊 Data Analyst</h3>
+        <div class="curr-grid">
+          <div class="curr-item"><span class="curr-dot"></span>SQL Queries</div>
+          <div class="curr-item"><span class="curr-dot"></span>Data Cleaning</div>
+          <div class="curr-item"><span class="curr-dot"></span>Data Analysis</div>
+          <div class="curr-item"><span class="curr-dot"></span>Data Visualization</div>
+          <div class="curr-item"><span class="curr-dot"></span>Dashboard Development</div>
+          <div class="curr-item"><span class="curr-dot"></span>Business Reporting</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SQL -->
+    <div class="tab-panel" id="tab-sql">
+      <div class="curr-card">
+        <h3>🗄️ SQL</h3>
+        <div class="curr-grid">
+          <div class="curr-item"><span class="curr-dot"></span>SQL Fundamentals</div>
+          <div class="curr-item"><span class="curr-dot"></span>Joins</div>
+          <div class="curr-item"><span class="curr-dot"></span>Subqueries</div>
+          <div class="curr-item"><span class="curr-dot"></span>Aggregations</div>
+          <div class="curr-item"><span class="curr-dot"></span>Views</div>
+          <div class="curr-item"><span class="curr-dot"></span>Stored Procedures</div>
+          <div class="curr-item"><span class="curr-dot"></span>Performance Optimization</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Power BI -->
+    <div class="tab-panel" id="tab-power-bi">
+      <div class="curr-card">
+        <h3>📈 Power BI</h3>
+        <div class="curr-grid">
+          <div class="curr-item"><span class="curr-dot"></span>Power Query</div>
+          <div class="curr-item"><span class="curr-dot"></span>Data Modeling</div>
+          <div class="curr-item"><span class="curr-dot"></span>DAX Functions</div>
+          <div class="curr-item"><span class="curr-dot"></span>Visualizations</div>
+          <div class="curr-item"><span class="curr-dot"></span>Dashboard Design</div>
+          <div class="curr-item"><span class="curr-dot"></span>Reports &amp; Publishing</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ETL -->
+    <div class="tab-panel" id="tab-etl">
+      <div class="curr-card">
+        <h3>⚙️ ETL Concepts</h3>
+        <div class="curr-grid">
+          <div class="curr-item"><span class="curr-dot"></span>ETL Process</div>
+          <div class="curr-item"><span class="curr-dot"></span>Data Extraction</div>
+          <div class="curr-item"><span class="curr-dot"></span>Data Transformation</div>
+          <div class="curr-item"><span class="curr-dot"></span>Data Loading</div>
+          <div class="curr-item"><span class="curr-dot"></span>Data Integration</div>
+          <div class="curr-item"><span class="curr-dot"></span>Scheduling &amp; Automation</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Snowflake -->
+    <div class="tab-panel" id="tab-snowflake">
+      <div class="curr-card">
+        <h3>❄️ Snowflake Data Engineer</h3>
+        <div class="curr-grid">
+          <div class="curr-item"><span class="curr-dot"></span>Snowflake Architecture</div>
+          <div class="curr-item"><span class="curr-dot"></span>Databases &amp; Schemas</div>
+          <div class="curr-item"><span class="curr-dot"></span>Data Loading</div>
+          <div class="curr-item"><span class="curr-dot"></span>Streams &amp; Tasks</div>
+          <div class="curr-item"><span class="curr-dot"></span>Performance Optimization</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Azure -->
+    <div class="tab-panel" id="tab-azure">
+      <div class="curr-card">
+        <h3>☁️ Azure Data Engineer</h3>
+        <div class="curr-grid">
+          <div class="curr-item"><span class="curr-dot"></span>Azure Data Factory</div>
+          <div class="curr-item"><span class="curr-dot"></span>Data Lake Storage</div>
+          <div class="curr-item"><span class="curr-dot"></span>Data Pipelines</div>
+          <div class="curr-item"><span class="curr-dot"></span>Data Modeling</div>
+          <div class="curr-item"><span class="curr-dot"></span>Synapse Analytics</div>
+          <div class="curr-item"><span class="curr-dot"></span>Microsoft Fabric</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Databricks -->
+    <div class="tab-panel" id="tab-databricks">
+      <div class="curr-card">
+        <h3>🔶 Databricks</h3>
+        <div class="curr-grid">
+          <div class="curr-item"><span class="curr-dot"></span>Databricks Architecture</div>
+          <div class="curr-item"><span class="curr-dot"></span>Spark &amp; PySpark</div>
+          <div class="curr-item"><span class="curr-dot"></span>Notebooks</div>
+          <div class="curr-item"><span class="curr-dot"></span>Delta Lake</div>
+          <div class="curr-item"><span class="curr-dot"></span>Data Engineering</div>
+          <div class="curr-item"><span class="curr-dot"></span>Performance Tuning</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IT Audit -->
+    <div class="tab-panel" id="tab-it-audit">
+      <div class="curr-card">
+        <h3>🔍 IT Audit</h3>
+        <div class="curr-grid">
+          <div class="curr-item"><span class="curr-dot"></span>IT Governance</div>
+          <div class="curr-item"><span class="curr-dot"></span>Risk &amp; Compliance</div>
+          <div class="curr-item"><span class="curr-dot"></span>Internal Controls</div>
+          <div class="curr-item"><span class="curr-dot"></span>Audit Process</div>
+          <div class="curr-item"><span class="curr-dot"></span>Cybersecurity Basics</div>
+          <div class="curr-item"><span class="curr-dot"></span>Audit Documentation</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ WHY CHOOSE ════════════════════════════════════ -->
+<section class="why" id="why">
+  <div class="section-inner">
+    <p class="section-tag">Our Advantages</p>
+    <h2 class="section-title">Why Choose <span class="hl">DD Tech Academy?</span></h2>
+    <div class="section-line"></div>
+    <div class="why-grid">
+      <div class="why-list">
+        <div class="why-item"><div class="why-check">✓</div> Industry Expert Trainers</div>
+        <div class="why-item"><div class="why-check">✓</div> Real-Time Projects</div>
+        <div class="why-item"><div class="why-check">✓</div> Hands-on Training</div>
+        <div class="why-item"><div class="why-check">✓</div> Interview Preparation</div>
+        <div class="why-item"><div class="why-check">✓</div> Support for Your Projects</div>
+        <div class="why-item"><div class="why-check">✓</div> Resume Building Support</div>
+        <div class="why-item"><div class="why-check">✓</div> Flexible Batches (Weekdays / Weekends)</div>
+        <div class="why-item"><div class="why-check">✓</div> Recorded Sessions</div>
+        <div class="why-item"><div class="why-check">✓</div> Placement Assistance</div>
+      </div>
+      <div class="us-box">
+        <div class="us-flag">🇺🇸</div>
+        <h3>WE TRAIN ONLY <span>US PEOPLE</span></h3>
+        <p>Our Training Programs are exclusively designed for Students and Professionals in the United States.</p>
+        <div class="us-statue">🗽</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SUPPORT BANNER ════════════════════════════════ -->
+<div class="support-banner">
+  <div class="section-inner">
+    <span class="support-icon">🤝</span>
+    <p class="support-text">WE WILL PROVIDE <span>FULL SUPPORT</span> FOR YOUR PROJECTS</p>
+  </div>
+</div>
+
+<!-- ═══ WHO CAN JOIN ══════════════════════════════════ -->
+<section class="join" id="join">
+  <div class="section-inner">
+    <p class="section-tag">Eligibility</p>
+    <h2 class="section-title">Who Can <span class="hl">Join?</span></h2>
+    <div class="section-line"></div>
+    <div class="join-grid">
+      <div class="join-card">
+        <div class="join-icon">🎓</div>
+        <div class="join-label">Freshers</div>
+      </div>
+      <div class="join-card">
+        <div class="join-icon">💼</div>
+        <div class="join-label">Working Professionals</div>
+      </div>
+      <div class="join-card">
+        <div class="join-icon">📚</div>
+        <div class="join-label">Students</div>
+      </div>
+      <div class="join-card">
+        <div class="join-icon">🔄</div>
+        <div class="join-label">Career Switchers</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA BANNER ════════════════════════════════════ -->
+<section class="cta-banner">
+  <div class="section-inner">
+    <h2>Learn. Practice. <span>Get Placed.</span></h2>
+    <p>Start your journey towards a bright future today!</p>
+    <a class="cta-enroll" href="#contact">⚡ Limited Seats — Enroll Now!</a>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══════════════════════════════════════ -->
+<section class="contact" id="contact">
+  <div class="section-inner">
+    <p class="section-tag">Get In Touch</p>
+    <h2 class="section-title">Contact <span class="hl">Us</span></h2>
+    <div class="section-line"></div>
+    <div class="contact-grid">
+
+      <div class="contact-card">
+        <div class="contact-icon">📞</div>
+        <h4>Call Us</h4>
+        <p><a href="tel:8688563751">8688563751</a></p>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-icon">✉️</div>
+        <h4>Email Us</h4>
+        <p><a href="mailto:vamsikrishnakesari@gmail.com">vamsikrishnakesari@gmail.com</a></p>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-icon">📍</div>
+        <h4>Location</h4>
+        <p>Hyderabad, Telangana, India</p>
+      </div>
+
+      <div class="contact-card">
+        <div class="qr-box">Scan to<br/>Enquire<br/>Now</div>
+        <h4>Quick Enquiry</h4>
+        <p>Scan QR code to connect instantly</p>
+      </div>
+
+      <div class="contact-card" style="grid-column: span 2;">
+        <div class="contact-icon">💬</div>
+        <h4>Let's Connect</h4>
+        <p>Have questions? We're here to help you build your future.<br/>
+          Reach out via phone, email, or scan the QR code above.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ════════════════════════════════════════ -->
+<footer>
+  <p>© 2025 <span>DD Tech Academy</span>. All rights reserved. &nbsp;|&nbsp; Your Gateway to Data &amp; Cloud Careers.</p>
+</footer>
+
+<script>
+  /* ── Tab System ─────────────────────── */
+  function openTab(id) {
+    // hide all panels
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+    const panel = document.getElementById('tab-' + id);
+    if (panel) panel.classList.add('active');
+
+    // match button by text content
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      const map = {
+        'data-analyst': 'data analyst',
+        'sql': 'sql',
+        'power-bi': 'power bi',
+        'etl': 'etl concepts',
+        'snowflake': 'snowflake',
+        'azure': 'azure de',
+        'databricks': 'databricks',
+        'it-audit': 'it audit'
+      };
+      if (btn.textContent.trim().toLowerCase() === (map[id] || id)) {
+        btn.classList.add('active');
+      }
+    });
+
+    // scroll curriculum section into view
+    const currSection = document.getElementById('curriculum');
+    if (currSection) {
+      const top = currSection.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  }
+
+  /* ── Mobile Nav ─────────────────────── */
+  function toggleNav() {
+    document.getElementById('mobileNav').classList.toggle('open');
+  }
+
+  /* ── Scroll-reveal animation ─────────── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.prog-card, .why-item, .join-card, .contact-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
