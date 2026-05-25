@@ -997,6 +997,16 @@
   <p>© 2025 <span>DD Tech Academy</span>. All rights reserved. &nbsp;|&nbsp; Your Gateway to Data &amp; Cloud Careers.</p>
 </footer>
 
+<!-- Hidden form so Netlify detects fields at build time -->
+<form name="enrollment" netlify netlify-honeypot="bot-field" hidden>
+  <input type="text"  name="Name" />
+  <input type="email" name="Email" />
+  <input type="tel"   name="Phone" />
+  <input type="text"  name="Course" />
+  <input type="text"  name="Background" />
+  <textarea           name="Message"></textarea>
+</form>
+
 <!-- ═══ ENROLL MODAL ══════════════════════════════════ -->
 <div class="modal-overlay" id="enrollModal" onclick="handleOverlayClick(event)">
   <div class="modal-box" id="modalBox">
@@ -1147,8 +1157,8 @@
     document.getElementById('mobileNav').classList.toggle('open');
   }
 
-  /* ── Formspree endpoint — replace with your ID from formspree.io ── */
-  var FORMSPREE_ID = 'mlgvwzjo';
+  /* ── Netlify Forms encode helper ── */
+  const encodeForm = d => Object.keys(d).map(k => encodeURIComponent(k) + '=' + encodeURIComponent(d[k])).join('&');
 
   /* ── Enroll Modal ───────────────────── */
   function openEnrollModal(course) {
@@ -1242,25 +1252,22 @@
       errEl.textContent = msg;
     };
 
-    fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+    fetch('/', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        Name:       payload.name,
-        Email:      payload.email,
-        Phone:      payload.phone,
-        Course:     payload.course,
-        Background: payload.experience,
-        Message:    payload.message
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encodeForm({
+        'form-name': 'enrollment',
+        'Name':       payload.name,
+        'Email':      payload.email,
+        'Phone':      payload.phone,
+        'Course':     payload.course,
+        'Background': payload.experience,
+        'Message':    payload.message
       })
     })
-    .then(res => res.json())
-    .then(data => {
-      if (data.ok) {
-        finish();
-      } else {
-        showFormError('Submission failed: ' + (data.error || 'Please try again.'));
-      }
+    .then(res => {
+      if (res.ok) finish();
+      else showFormError('Submission failed. Please try again.');
     })
     .catch(() => showFormError('Network error. Please check your connection and try again.'));
   }
