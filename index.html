@@ -1159,10 +1159,10 @@
   }
 
   /* ── EmailJS config — paste your 3 values from emailjs.com ── */
-  const EJS_PUBLIC_KEY  = 'tx3R4JtmJxlk3o9Fm';
   const EJS_SERVICE_ID  = 'service_ce3ty4b';
   const EJS_TEMPLATE_ID = 'template_w3qxx0f';
-  emailjs.init(EJS_PUBLIC_KEY);
+  const EJS_PUBLIC_KEY  = 'tx3R4JtmJxlk3o9Fm';
+  emailjs.init({ publicKey: EJS_PUBLIC_KEY });
 
   /* ── Enroll Modal ───────────────────── */
   function openEnrollModal(course) {
@@ -1268,7 +1268,7 @@
         course:     payload.course,
         background: payload.experience,
         message:    payload.message || 'No message provided'
-      }),
+      }, { publicKey: EJS_PUBLIC_KEY }),
       timeout
     ])
     .then(() => finish())
