@@ -36,13 +36,16 @@ function doPost(e) {
 
     sheet.appendRow([
       new Date(),
-      data.name    || '',
-      data.email   || '',
-      data.phone   || '',
-      data.course  || '',
+      data.name       || '',
+      data.email      || '',
+      data.phone      || '',
+      data.course     || '',
       data.experience || '',
-      data.message || ''
+      data.message    || ''
     ]);
+
+    // Send instant notification email
+    sendInstantNotification(data);
 
     return ContentService
       .createTextOutput(JSON.stringify({ status: 'success' }))
@@ -53,6 +56,74 @@ function doPost(e) {
       .createTextOutput(JSON.stringify({ status: 'error', message: err.message }))
       .setMimeType(ContentService.MimeType.JSON);
   }
+}
+
+// ── Instant email on every new enrollment ────────────────────────────────────
+function sendInstantNotification(data) {
+  var now      = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'MMM dd, yyyy — hh:mm a');
+  var msgBlock = data.message
+    ? '<tr><td style="padding:10px 16px;color:#6b7280;font-weight:600;width:140px">Message</td><td style="padding:10px 16px">' + data.message + '</td></tr>'
+    : '';
+
+  var html =
+    '<div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;background:#f4f6fb;padding:20px">' +
+
+    '<div style="background:linear-gradient(135deg,#0f1e4a,#1a2a5e);border-radius:12px 12px 0 0;padding:24px 28px;display:flex;align-items:center;gap:14px">' +
+      '<div style="background:#f5a623;border-radius:8px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#fff;flex-shrink:0">DD</div>' +
+      '<div>' +
+        '<div style="font-size:16px;font-weight:900;color:#fff">DD Tech Academy</div>' +
+        '<div style="color:rgba(255,255,255,.6);font-size:12px">New Enrollment Received</div>' +
+      '</div>' +
+    '</div>' +
+
+    '<div style="background:#fff;padding:0">' +
+      '<div style="background:#22c55e;padding:14px 28px;display:flex;align-items:center;gap:10px">' +
+        '<span style="font-size:22px">🎉</span>' +
+        '<span style="font-size:15px;font-weight:800;color:#fff">You have a new enrollment!</span>' +
+      '</div>' +
+
+      '<table style="width:100%;border-collapse:collapse;font-size:14px">' +
+        '<tr style="background:#f4f6fb">' +
+          '<td style="padding:12px 16px;color:#6b7280;font-weight:600;width:140px">Name</td>' +
+          '<td style="padding:12px 16px;font-weight:700;color:#1a2a5e">' + (data.name || '—') + '</td>' +
+        '</tr>' +
+        '<tr>' +
+          '<td style="padding:12px 16px;color:#6b7280;font-weight:600">Email</td>' +
+          '<td style="padding:12px 16px"><a href="mailto:' + data.email + '" style="color:#1a2a5e;font-weight:700">' + (data.email || '—') + '</a></td>' +
+        '</tr>' +
+        '<tr style="background:#f4f6fb">' +
+          '<td style="padding:12px 16px;color:#6b7280;font-weight:600">Phone</td>' +
+          '<td style="padding:12px 16px;font-weight:700">' + (data.phone || '—') + '</td>' +
+        '</tr>' +
+        '<tr>' +
+          '<td style="padding:12px 16px;color:#6b7280;font-weight:600">Course</td>' +
+          '<td style="padding:12px 16px"><span style="background:#f5a623;color:#fff;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:800">' + (data.course || '—') + '</span></td>' +
+        '</tr>' +
+        '<tr style="background:#f4f6fb">' +
+          '<td style="padding:12px 16px;color:#6b7280;font-weight:600">Background</td>' +
+          '<td style="padding:12px 16px">' + (data.experience || '—') + '</td>' +
+        '</tr>' +
+        msgBlock +
+        '<tr>' +
+          '<td style="padding:12px 16px;color:#6b7280;font-weight:600">Received At</td>' +
+          '<td style="padding:12px 16px;color:#6b7280;font-size:12px">' + now + '</td>' +
+        '</tr>' +
+      '</table>' +
+    '</div>' +
+
+    '<div style="background:#fff;border-top:2px solid #f4f6fb;padding:18px 28px;text-align:center;border-radius:0 0 12px 12px">' +
+      '<a href="mailto:' + data.email + '" style="display:inline-block;background:#1a2a5e;color:#fff;padding:11px 28px;border-radius:8px;font-weight:700;text-decoration:none;font-size:13px;margin-right:10px">✉️ Reply to Student</a>' +
+      '<a href="tel:' + data.phone + '" style="display:inline-block;background:#f5a623;color:#fff;padding:11px 28px;border-radius:8px;font-weight:700;text-decoration:none;font-size:13px">📞 Call Now</a>' +
+    '</div>' +
+
+    '<div style="text-align:center;padding:16px;color:#9ca3af;font-size:11px">DD Tech Academy — Automated Notification</div>' +
+    '</div>';
+
+  MailApp.sendEmail({
+    to:       NOTIFY_EMAIL,
+    subject:  '🎓 New Enrollment: ' + (data.name || 'Someone') + ' — ' + (data.course || 'Unknown Course'),
+    htmlBody: html
+  });
 }
 
 // Handle CORS preflight
