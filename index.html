@@ -429,11 +429,14 @@
     .form-group select.error { border-color: var(--red); }
     .form-group textarea { resize: vertical; min-height: 80px; }
     .phone-wrap { display: flex; gap: 8px; }
-    .phone-code {
-      width: 80px; padding: 12px 10px; border-radius: 10px;
+    .phone-wrap .phone-code {
+      width: 90px !important; padding: 12px 8px; border-radius: 10px;
       border: 2px solid var(--border); font-family: 'Montserrat', sans-serif;
       font-size: 13px; font-weight: 700; color: #333;
       background: var(--light); flex-shrink: 0;
+    }
+    .phone-wrap input[type="tel"] {
+      flex: 1; width: auto !important; min-width: 0;
     }
     .err-msg { font-size: 11px; color: var(--red); font-weight: 600; margin-top: 4px; display: none; }
     .err-msg.show { display: block; }
