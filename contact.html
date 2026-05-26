@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | DD Tech Academy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<!-- ═══ HEADER ══════════════════════════════════════════════════════════════ -->
+<header>
+  <div class="header-inner">
+    <a class="logo-wrap" href="index.html">
+      <div class="logo-dd">DD</div>
+      <div class="logo-text">DD TECH ACADEMY<span>— Academy —</span></div>
+    </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="courses.html">Courses</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+    <button class="enroll-btn" onclick="openEnrollModal()">Enroll Now</button>
+    <div class="hamburger" id="ham" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav" onclick="toggleNav()">
+  <div class="mobile-nav-panel" onclick="event.stopPropagation()">
+    <a href="index.html">Home</a>
+    <a href="courses.html">Courses</a>
+    <a href="about.html">About</a>
+    <a href="contact.html" class="active">Contact</a>
+    <button onclick="toggleNav();openEnrollModal();" style="background:var(--orange);color:#fff;margin-top:8px;font-weight:800;border:none;padding:12px 16px;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:14px;cursor:pointer;text-align:center;">Enroll Now</button>
+  </div>
+</div>
+
+<!-- ═══ PAGE HERO ════════════════════════════════════════════════════════════ -->
+<div class="page-hero">
+  <p class="page-hero-tag">Reach Out</p>
+  <h1>Contact <span>Us</span></h1>
+  <p>We'd love to hear from you — call, email, or fill in the form below</p>
+  <div class="breadcrumb">
+    <a href="index.html">Home</a>
+    <span>›</span>
+    <span>Contact</span>
+  </div>
+</div>
+
+<!-- ═══ CONTACT CARDS ════════════════════════════════════════════════════════ -->
+<section class="contact" id="contact">
+  <div class="section-inner">
+    <p class="section-tag">Get In Touch</p>
+    <h2 class="section-title">How to <span class="hl">Reach Us</span></h2>
+    <div class="section-line"></div>
+    <div class="contact-grid">
+
+      <div class="contact-card">
+        <div class="contact-icon">📞</div>
+        <h4>Call Us</h4>
+        <p><a href="tel:8688563751">8688563751</a></p>
+        <p style="font-size:12px;color:var(--gray);margin-top:6px;">Mon–Sat, 9 AM – 6 PM IST</p>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-icon">✉️</div>
+        <h4>Email Us</h4>
+        <p><a href="mailto:vamsikrishnakesari@gmail.com">vamsikrishnakesari@gmail.com</a></p>
+        <p style="font-size:12px;color:var(--gray);margin-top:6px;">We reply within 24 hours</p>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-icon">📍</div>
+        <h4>Location</h4>
+        <p>Hyderabad, Telangana, India</p>
+        <p style="font-size:12px;color:var(--gray);margin-top:6px;">Online classes — US timezone</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ENROLLMENT FORM ══════════════════════════════════════════════════════ -->
+<section class="form-section" id="enroll">
+  <div class="section-inner">
+    <p class="section-tag">Enroll Today</p>
+    <h2 class="section-title">Free <span class="hl">Enrollment Form</span></h2>
+    <div class="section-line"></div>
+
+    <div class="form-card">
+      <h3>Start Your Journey</h3>
+      <p class="form-card-sub">Fill in your details and our team will reach out within 24 hours to confirm your seat.</p>
+
+      <form id="enrollForm" action="https://formsubmit.co/vamsikrishnakesari@gmail.com"
+            method="POST" onsubmit="return validateEnrollForm()">
+        <input type="hidden" name="_subject"  value="🎓 New Enrollment — DD Tech Academy">
+        <input type="hidden" name="_captcha"  value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next"     id="f-next" value="">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="f-name">Full Name *</label>
+            <input type="text" id="f-name" name="Name" placeholder="John Smith">
+            <div class="err-msg" id="err-name">Please enter your full name.</div>
+          </div>
+          <div class="form-group">
+            <label for="f-email">Email Address *</label>
+            <input type="email" id="f-email" name="Email" placeholder="john@example.com">
+            <div class="err-msg" id="err-email">Please enter a valid email.</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="f-phone">Phone Number *</label>
+          <div class="phone-wrap">
+            <select class="phone-code" id="f-code" name="Country_Code">
+              <option value="+1">🇺🇸 +1</option>
+              <option value="+91">🇮🇳 +91</option>
+              <option value="+44">🇬🇧 +44</option>
+              <option value="+61">🇦🇺 +61</option>
+              <option value="+1-CA">🇨🇦 +1</option>
+            </select>
+            <input type="tel" id="f-phone" name="Phone" placeholder="(555) 000-0000">
+          </div>
+          <div class="err-msg" id="err-phone">Please enter a valid phone number.</div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="f-course">Course Interested In *</label>
+            <select id="f-course" name="Course">
+              <option value="">— Select a Program —</option>
+              <option>Data Analyst</option>
+              <option>SQL</option>
+              <option>Power BI</option>
+              <option>ETL Concepts</option>
+              <option>Snowflake Data Engineer</option>
+              <option>Azure Data Engineer</option>
+              <option>Databricks</option>
+              <option>IT Audit</option>
+            </select>
+            <div class="err-msg" id="err-course">Please select a program.</div>
+          </div>
+          <div class="form-group">
+            <label for="f-exp">Your Background *</label>
+            <select id="f-exp" name="Background">
+              <option value="">— Select your profile —</option>
+              <option>Working Professional – Technical</option>
+              <option>Working Professional – Non-Technical</option>
+              <option>College Student – Final Year</option>
+              <option>College Student – 1st to Pre-Final Year</option>
+              <option>Fresher / Recent Graduate</option>
+              <option>Career Switcher</option>
+              <option>Other</option>
+            </select>
+            <div class="err-msg" id="err-exp">Please select your background.</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="f-msg">Message (Optional)</label>
+          <textarea id="f-msg" name="Message" placeholder="Any questions or specific requirements..."></textarea>
+        </div>
+
+        <div class="terms-wrap">
+          <input type="checkbox" id="f-terms">
+          <label for="f-terms">I authorise DD Tech Academy to contact me with course updates &amp; offers via Email / SMS / WhatsApp / Call. I agree to the Privacy Policy and Terms of Use.</label>
+        </div>
+        <div class="err-msg" id="err-terms" style="margin-top:-12px;margin-bottom:14px;">Please accept the terms to continue.</div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">🚀 Submit Enrollment</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ══════════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo-wrap" href="index.html">
+          <div class="logo-dd">DD</div>
+          <div class="logo-text">DD TECH ACADEMY<span>— Academy —</span></div>
+        </a>
+        <p>Industry-oriented training programs designed for students and professionals in the United States.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Quick Links</h5>
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h5>Programs</h5>
+        <a href="courses.html">Data Analyst</a>
+        <a href="courses.html">SQL Training</a>
+        <a href="courses.html">Power BI</a>
+        <a href="courses.html">Azure Data Engineer</a>
+        <a href="courses.html">Databricks</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <a href="tel:8688563751">📞 8688563751</a>
+        <a href="mailto:vamsikrishnakesari@gmail.com">✉️ Email Us</a>
+        <a href="contact.html">📍 Hyderabad, India</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 <span>DD Tech Academy</span>. All rights reserved.</p>
+      <p>Your Gateway to Data &amp; Cloud Careers</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ ENROLL MODAL (for header Enroll Now button) ═════════════════════════ -->
+<div class="modal-overlay" id="enrollModal" onclick="handleOverlayClick(event)">
+  <div class="modal-box" id="modalBox">
+    <div class="modal-success" id="modalSuccess">
+      <div class="success-circle">✓</div>
+      <h3>You're All Set! 🎉</h3>
+      <p>Thank you for enrolling with <strong>DD Tech Academy</strong>.<br>
+         Our team will reach out within <strong>24 hours</strong> to confirm your seat.</p>
+      <button class="success-close" onclick="closeEnrollModal()">Close</button>
+    </div>
+    <div class="modal-left" id="modalLeft">
+      <h3>Start Your <span>Journey</span> Today</h3>
+      <p>Join thousands who have transformed their careers with DD Tech Academy.</p>
+      <div class="modal-perk"><div class="modal-perk-icon">🎓</div> Industry-Expert Trainers</div>
+      <div class="modal-perk"><div class="modal-perk-icon">💻</div> Real-Time Projects</div>
+      <div class="modal-perk"><div class="modal-perk-icon">📄</div> Resume &amp; Interview Support</div>
+      <div class="modal-perk"><div class="modal-perk-icon">🏅</div> Placement Assistance</div>
+      <div class="modal-perk"><div class="modal-perk-icon">🗓️</div> Flexible Batches</div>
+      <div class="modal-seats">⚡ Limited Seats — Enroll Now!</div>
+    </div>
+    <div class="modal-right" id="modalForm">
+      <button class="modal-close" onclick="closeEnrollModal()" aria-label="Close">✕</button>
+      <p style="font-size:16px;font-weight:800;color:var(--navy);margin-bottom:8px;">Scroll down to enroll 👇</p>
+      <p style="font-size:13px;color:var(--gray);margin-bottom:24px;">Use the enrollment form on this page, or call us directly.</p>
+      <a href="tel:8688563751" style="display:block;background:var(--navy);color:#fff;text-align:center;padding:14px;border-radius:10px;font-weight:700;font-size:14px;text-decoration:none;margin-bottom:12px;">📞 Call 8688563751</a>
+      <a href="mailto:vamsikrishnakesari@gmail.com" style="display:block;border:2px solid var(--navy);color:var(--navy);text-align:center;padding:12px;border-radius:10px;font-weight:700;font-size:14px;text-decoration:none;">✉️ Email Us</a>
+      <button class="modal-close" onclick="closeEnrollModal()" style="position:absolute;top:16px;right:16px;">✕</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+<script>
+  /* On contact page: "Enroll Now" button scrolls to the form */
+  function openEnrollModal() {
+    const formSection = document.getElementById('enroll');
+    if (formSection) {
+      formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+</script>
+</body>
+</html>

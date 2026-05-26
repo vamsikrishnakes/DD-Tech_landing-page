@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DD Tech Academy – Your Gateway to Data &amp; Cloud Careers</title>
+  <title>About Us | DD Tech Academy</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
@@ -17,9 +17,9 @@
       <div class="logo-text">DD TECH ACADEMY<span>— Academy —</span></div>
     </a>
     <nav>
-      <a href="index.html"   class="active">Home</a>
+      <a href="index.html">Home</a>
       <a href="courses.html">Courses</a>
-      <a href="about.html">About</a>
+      <a href="about.html" class="active">About</a>
       <a href="contact.html">Contact</a>
     </nav>
     <button class="enroll-btn" onclick="openEnrollModal()">Enroll Now</button>
@@ -32,42 +32,25 @@
 <!-- Mobile Nav -->
 <div class="mobile-nav" id="mobileNav" onclick="toggleNav()">
   <div class="mobile-nav-panel" onclick="event.stopPropagation()">
-    <a href="index.html"   class="active">Home</a>
+    <a href="index.html">Home</a>
     <a href="courses.html">Courses</a>
-    <a href="about.html">About</a>
+    <a href="about.html" class="active">About</a>
     <a href="contact.html">Contact</a>
     <button onclick="toggleNav();openEnrollModal();" style="background:var(--orange);color:#fff;margin-top:8px;font-weight:800;border:none;padding:12px 16px;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:14px;cursor:pointer;text-align:center;">Enroll Now</button>
   </div>
 </div>
 
-<!-- ═══ HERO ════════════════════════════════════════════════════════════════ -->
-<section class="hero" id="hero">
-  <div class="hero-inner">
-    <div class="hero-left">
-      <p class="hero-sub">Your Gateway to Data &amp; Cloud Careers</p>
-      <h1 class="hero-title">
-        Master <span class="highlight">In-Demand</span><br>
-        Skills. Build A<br>
-        Successful Career.
-      </h1>
-      <p class="hero-desc">
-        Industry-oriented training programs designed exclusively for students
-        and professionals in the United States. Real-time projects, expert
-        trainers, and guaranteed placement support.
-      </p>
-      <div class="hero-btns">
-        <a class="btn-primary" href="courses.html">Explore Programs</a>
-        <a class="btn-outline" href="#" onclick="openEnrollModal();return false;">Talk to an Advisor</a>
-      </div>
-    </div>
-    <div class="hero-badge-row">
-      <div class="badge-item"><div class="badge-check">✓</div> Industry-Oriented Training</div>
-      <div class="badge-item"><div class="badge-check">✓</div> Real-Time Projects</div>
-      <div class="badge-item"><div class="badge-check">✓</div> US-Focused Programs</div>
-      <div class="badge-item"><div class="badge-check">✓</div> Placement Assistance</div>
-    </div>
+<!-- ═══ PAGE HERO ════════════════════════════════════════════════════════════ -->
+<div class="page-hero">
+  <p class="page-hero-tag">Who We Are</p>
+  <h1>About <span>DD Tech Academy</span></h1>
+  <p>Empowering the next generation of Data &amp; Cloud professionals in the US</p>
+  <div class="breadcrumb">
+    <a href="index.html">Home</a>
+    <span>›</span>
+    <span>About</span>
   </div>
-</section>
+</div>
 
 <!-- ═══ STATS BAR ═══════════════════════════════════════════════════════════ -->
 <div class="stats-bar">
@@ -91,129 +74,7 @@
   </div>
 </div>
 
-<!-- ═══ PROGRAMS ════════════════════════════════════════════════════════════ -->
-<section class="programs" id="programs">
-  <div class="section-inner">
-    <p class="section-tag">What We Offer</p>
-    <h2 class="section-title">Our Training <span class="hl">Programs</span></h2>
-    <div class="section-line"></div>
-    <div class="programs-grid">
-
-      <a class="prog-card" href="courses.html#tab-data-analyst">
-        <div class="prog-icon">
-          <svg viewBox="0 0 60 60" fill="none">
-            <rect x="4" y="30" width="10" height="22" rx="2" fill="#22c55e"/>
-            <rect x="18" y="20" width="10" height="32" rx="2" fill="#16a34a"/>
-            <rect x="32" y="10" width="10" height="42" rx="2" fill="#15803d"/>
-            <rect x="46" y="24" width="10" height="28" rx="2" fill="#22c55e"/>
-            <circle cx="8" cy="14" r="4" fill="#f5a623"/>
-            <line x1="8" y1="14" x2="52" y2="8" stroke="#f5a623" stroke-width="2" stroke-dasharray="3,2"/>
-          </svg>
-        </div>
-        <div class="prog-label">Data Analyst</div>
-      </a>
-
-      <a class="prog-card" href="courses.html#tab-sql">
-        <div class="prog-icon">
-          <svg viewBox="0 0 60 60" fill="none">
-            <ellipse cx="30" cy="14" rx="22" ry="8" fill="#1a2a5e"/>
-            <path d="M8 14v10c0 4.4 9.8 8 22 8s22-3.6 22-8V14" fill="#1a2a5e" opacity=".8"/>
-            <ellipse cx="30" cy="24" rx="22" ry="8" fill="#2d4a9e"/>
-            <path d="M8 24v10c0 4.4 9.8 8 22 8s22-3.6 22-8V24" fill="#2d4a9e" opacity=".8"/>
-            <ellipse cx="30" cy="34" rx="22" ry="8" fill="#3d6ad4"/>
-            <text x="30" y="38" text-anchor="middle" fill="white" font-size="9" font-weight="700" font-family="Montserrat,sans-serif">SQL</text>
-          </svg>
-        </div>
-        <div class="prog-label">SQL</div>
-      </a>
-
-      <a class="prog-card" href="courses.html#tab-power-bi">
-        <div class="prog-icon">
-          <svg viewBox="0 0 60 60" fill="none">
-            <rect x="6" y="36" width="10" height="16" rx="2" fill="#f5a623"/>
-            <rect x="20" y="24" width="10" height="28" rx="2" fill="#e0941a"/>
-            <rect x="34" y="14" width="10" height="38" rx="2" fill="#f5a623"/>
-            <rect x="48" y="28" width="6" height="24" rx="2" fill="#ffd166"/>
-            <polyline points="6,30 20,22 34,12 54,20" stroke="#1a2a5e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div class="prog-label">Power BI</div>
-      </a>
-
-      <a class="prog-card" href="courses.html#tab-etl">
-        <div class="prog-icon">
-          <svg viewBox="0 0 60 60" fill="none">
-            <circle cx="12" cy="30" r="10" fill="#6366f1" opacity=".9"/>
-            <circle cx="48" cy="30" r="10" fill="#8b5cf6" opacity=".9"/>
-            <rect x="22" y="22" width="16" height="16" rx="4" fill="#4f46e5"/>
-            <text x="30" y="33" text-anchor="middle" fill="white" font-size="7" font-weight="800" font-family="Montserrat,sans-serif">ETL</text>
-            <path d="M22 30h-10M38 30h10" stroke="#4f46e5" stroke-width="2" stroke-dasharray="2,1"/>
-          </svg>
-        </div>
-        <div class="prog-label">ETL Concepts</div>
-      </a>
-
-      <a class="prog-card" href="courses.html#tab-snowflake">
-        <div class="prog-icon">
-          <svg viewBox="0 0 60 60" fill="none">
-            <line x1="30" y1="4" x2="30" y2="56" stroke="#29b5e8" stroke-width="4" stroke-linecap="round"/>
-            <line x1="4" y1="30" x2="56" y2="30" stroke="#29b5e8" stroke-width="4" stroke-linecap="round"/>
-            <line x1="10" y1="10" x2="50" y2="50" stroke="#29b5e8" stroke-width="4" stroke-linecap="round"/>
-            <line x1="50" y1="10" x2="10" y2="50" stroke="#29b5e8" stroke-width="4" stroke-linecap="round"/>
-            <circle cx="30" cy="30" r="6" fill="#29b5e8"/>
-            <circle cx="30" cy="6" r="3" fill="#0096c7"/>
-            <circle cx="30" cy="54" r="3" fill="#0096c7"/>
-            <circle cx="6" cy="30" r="3" fill="#0096c7"/>
-            <circle cx="54" cy="30" r="3" fill="#0096c7"/>
-          </svg>
-        </div>
-        <div class="prog-label">Snowflake Data Engineer</div>
-      </a>
-
-      <a class="prog-card" href="courses.html#tab-azure">
-        <div class="prog-icon">
-          <svg viewBox="0 0 60 60" fill="none">
-            <polygon points="20,8 36,8 54,50 38,50" fill="#0078d4" opacity=".9"/>
-            <polygon points="6,50 22,50 30,30 14,30" fill="#50b8fa"/>
-            <polygon points="20,8 14,30 30,30 36,8" fill="#0090e0"/>
-          </svg>
-        </div>
-        <div class="prog-label">Azure Data Engineer</div>
-      </a>
-
-      <a class="prog-card" href="courses.html#tab-databricks">
-        <div class="prog-icon">
-          <svg viewBox="0 0 60 60" fill="none">
-            <polygon points="30,4 54,18 54,42 30,56 6,42 6,18" fill="#e02020" opacity=".15" stroke="#e02020" stroke-width="2"/>
-            <polygon points="30,12 46,22 46,38 30,48 14,38 14,22" fill="#e02020" opacity=".3"/>
-            <polygon points="30,22 38,27 38,37 30,42 22,37 22,27" fill="#e02020"/>
-            <text x="30" y="34" text-anchor="middle" fill="white" font-size="8" font-weight="800" font-family="Montserrat,sans-serif">DB</text>
-          </svg>
-        </div>
-        <div class="prog-label">Databricks</div>
-      </a>
-
-      <a class="prog-card" href="courses.html#tab-it-audit">
-        <div class="prog-icon">
-          <svg viewBox="0 0 60 60" fill="none">
-            <rect x="10" y="6" width="34" height="44" rx="4" fill="#f4f6fb" stroke="#1a2a5e" stroke-width="2.5"/>
-            <rect x="20" y="2" width="14" height="10" rx="3" fill="#1a2a5e"/>
-            <line x1="18" y1="24" x2="36" y2="24" stroke="#1a2a5e" stroke-width="2" stroke-linecap="round"/>
-            <line x1="18" y1="32" x2="36" y2="32" stroke="#1a2a5e" stroke-width="2" stroke-linecap="round"/>
-            <line x1="18" y1="40" x2="28" y2="40" stroke="#1a2a5e" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="15" cy="24" r="2.5" fill="#22c55e"/>
-            <circle cx="15" cy="32" r="2.5" fill="#22c55e"/>
-            <circle cx="15" cy="40" r="2.5" fill="#f5a623"/>
-          </svg>
-        </div>
-        <div class="prog-label">IT Audit</div>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══ WHY CHOOSE US (brief) ═══════════════════════════════════════════════ -->
+<!-- ═══ WHY CHOOSE ═══════════════════════════════════════════════════════════ -->
 <section class="why" id="why">
   <div class="section-inner">
     <p class="section-tag">Our Advantages</p>
@@ -225,16 +86,16 @@
         <div class="why-item"><div class="why-check">✓</div> Real-Time Projects</div>
         <div class="why-item"><div class="why-check">✓</div> Hands-on Training</div>
         <div class="why-item"><div class="why-check">✓</div> Interview Preparation</div>
+        <div class="why-item"><div class="why-check">✓</div> Support for Your Projects</div>
         <div class="why-item"><div class="why-check">✓</div> Resume Building Support</div>
         <div class="why-item"><div class="why-check">✓</div> Flexible Batches (Weekdays / Weekends)</div>
         <div class="why-item"><div class="why-check">✓</div> Recorded Sessions</div>
         <div class="why-item"><div class="why-check">✓</div> Placement Assistance</div>
-        <a href="about.html" style="display:inline-block;margin-top:8px;font-size:13px;font-weight:700;color:var(--orange);text-decoration:none;">Learn more about us →</a>
       </div>
       <div class="us-box">
         <div class="us-flag">🇺🇸</div>
         <h3>WE TRAIN ONLY <span>US PEOPLE</span></h3>
-        <p>Our Training Programs are exclusively designed for Students and Professionals in the United States.</p>
+        <p>Our Training Programs are exclusively designed for Students and Professionals in the United States. We understand the US job market, interview process, and employer expectations.</p>
         <div class="us-statue">🗽</div>
       </div>
     </div>
@@ -249,11 +110,38 @@
   </div>
 </div>
 
+<!-- ═══ WHO CAN JOIN ═════════════════════════════════════════════════════════ -->
+<section class="join" id="join">
+  <div class="section-inner">
+    <p class="section-tag">Eligibility</p>
+    <h2 class="section-title">Who Can <span class="hl">Join?</span></h2>
+    <div class="section-line"></div>
+    <div class="join-grid">
+      <div class="join-card">
+        <div class="join-icon">🎓</div>
+        <div class="join-label">Freshers</div>
+      </div>
+      <div class="join-card">
+        <div class="join-icon">💼</div>
+        <div class="join-label">Working Professionals</div>
+      </div>
+      <div class="join-card">
+        <div class="join-icon">📚</div>
+        <div class="join-label">Students</div>
+      </div>
+      <div class="join-card">
+        <div class="join-icon">🔄</div>
+        <div class="join-label">Career Switchers</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ CTA BANNER ══════════════════════════════════════════════════════════ -->
 <section class="cta-banner">
   <div class="section-inner">
     <h2>Learn. Practice. <span>Get Placed.</span></h2>
-    <p>Start your journey towards a bright future today!</p>
+    <p>Join DD Tech Academy and take the first step toward your dream career in Data &amp; Cloud.</p>
     <button class="cta-enroll" onclick="openEnrollModal()">⚡ Limited Seats — Enroll Now!</button>
   </div>
 </section>
@@ -305,18 +193,18 @@
       <div class="success-circle">✓</div>
       <h3>You're All Set! 🎉</h3>
       <p>Thank you for enrolling with <strong>DD Tech Academy</strong>.<br>
-         Our team will reach out within <strong>24 hours</strong> to confirm your seat and share next steps.</p>
-      <button class="success-close" onclick="closeEnrollModal()">Back to Home</button>
+         Our team will reach out within <strong>24 hours</strong> to confirm your seat.</p>
+      <button class="success-close" onclick="closeEnrollModal()">Close</button>
     </div>
     <div class="modal-left" id="modalLeft">
       <h3>Start Your <span>Journey</span> Today</h3>
-      <p>Join thousands of students and professionals who have transformed their careers with DD Tech Academy.</p>
+      <p>Join thousands who have transformed their careers with DD Tech Academy.</p>
       <div class="modal-perk"><div class="modal-perk-icon">🎓</div> Industry-Expert Trainers</div>
-      <div class="modal-perk"><div class="modal-perk-icon">💻</div> Real-Time Hands-On Projects</div>
+      <div class="modal-perk"><div class="modal-perk-icon">💻</div> Real-Time Projects</div>
       <div class="modal-perk"><div class="modal-perk-icon">📄</div> Resume &amp; Interview Support</div>
       <div class="modal-perk"><div class="modal-perk-icon">🏅</div> Placement Assistance</div>
-      <div class="modal-perk"><div class="modal-perk-icon">🗓️</div> Flexible Weekday / Weekend Batches</div>
-      <div class="modal-seats">⚡ Limited Seats Available — Enroll Now!</div>
+      <div class="modal-perk"><div class="modal-perk-icon">🗓️</div> Flexible Batches</div>
+      <div class="modal-seats">⚡ Limited Seats — Enroll Now!</div>
     </div>
     <div class="modal-right" id="modalForm">
       <button class="modal-close" onclick="closeEnrollModal()" aria-label="Close">✕</button>
@@ -389,7 +277,7 @@
         </div>
         <div class="terms-wrap">
           <input type="checkbox" id="f-terms">
-          <label for="f-terms">I authorise DD Tech Academy to contact me with course updates &amp; offers via Email / SMS / WhatsApp / Call. I agree to the Privacy Policy and Terms of Use.</label>
+          <label for="f-terms">I authorise DD Tech Academy to contact me via Email / SMS / WhatsApp / Call.</label>
         </div>
         <div class="err-msg" id="err-terms" style="margin-top:-12px;margin-bottom:14px;">Please accept the terms to continue.</div>
         <button type="submit" class="modal-submit" id="submitBtn">🚀 Enroll for Free</button>
