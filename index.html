@@ -322,12 +322,11 @@
       <button class="modal-close" onclick="closeEnrollModal()" aria-label="Close">✕</button>
       <h4>Free Enrollment</h4>
       <p class="modal-sub">Fill in your details and we'll get back to you within 24 hours.</p>
-      <form id="enrollForm" action="https://formsubmit.co/vamsikrishnakesari@gmail.com"
-            method="POST" onsubmit="return validateEnrollForm()">
+      <form id="enrollForm" action="https://formsubmit.co/ajax/vamsikrishnakesari@gmail.com"
+            method="POST" onsubmit="handleFormSubmit(event)">
         <input type="hidden" name="_subject"  value="🎓 New Enrollment — DD Tech Academy">
         <input type="hidden" name="_captcha"  value="false">
         <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_next"     id="f-next" value="">
         <div class="form-row">
           <div class="form-group">
             <label for="f-name">Full Name *</label>
